@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>Stintmint API Docs</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -201,7 +201,7 @@
       <script src="javascripts/all-c5541673.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;python&quot;,&quot;java&quot;,&quot;shell&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -211,10 +211,9 @@
     <div class="toc-wrapper">
       <img src="images/logo-1e815a84.png" class="logo" alt="Logo" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">javascript</a>
+              <a href="#" data-language-name="python">Python</a>
+              <a href="#" data-language-name="java">Java</a>
+              <a href="#" data-language-name="shell">cURL</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -225,19 +224,38 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
-          </li>
-          <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#post-data-to-stintflow" class="toc-h1 toc-link" data-title="POST data to StintFlow">POST data to StintFlow</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#api-endpoint" class="toc-h2 toc-link" data-title="API Endpoint">API Endpoint</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                    <a href="#authentication" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
                   </li>
                   <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#post-parameters" class="toc-h2 toc-link" data-title="POST Parameters">POST Parameters</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#stintflow-responses" class="toc-h1 toc-link" data-title="StintFlow responses">StintFlow responses</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#fixed-endpoint" class="toc-h2 toc-link" data-title="Fixed Endpoint">Fixed Endpoint</a>
+                  </li>
+                  <li>
+                    <a href="#configure-endpoint" class="toc-h2 toc-link" data-title="Configure Endpoint">Configure Endpoint</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#fetch-responses" class="toc-h1 toc-link" data-title="FETCH responses">FETCH responses</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#stintflow-responses-2" class="toc-h2 toc-link" data-title="StintFlow responses">StintFlow responses</a>
+                  </li>
+                  <li>
+                    <a href="#module-responses" class="toc-h2 toc-link" data-title="Module responses">Module responses</a>
                   </li>
               </ul>
           </li>
@@ -246,88 +264,143 @@
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a></li>
+            <li><a href='https://stintmint.com/enterprise/signup'>Sign Up for a Developer Key</a></li>
+            <li><a href='http://support.stintmint.com'>Chat with us</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Welcome to the Stintmint API! You can use our API to access Stintflow API endpoints, which can send data and receive results from all StintFlows.</p>
 
-<p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>We have language bindings in Shell, Python, and Java! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<h1 id='post-data-to-stintflow'>POST data to StintFlow</h1><h2 id='api-endpoint'>API Endpoint</h2>
+<p><code>POST https://stintmint.com/api/v1/post</code></p>
+<h2 id='authentication'>Authentication</h2>
+<p>Stintmint uses Basic Auth to allow access to the API. You need to signup on Stintmint Console to get an authentication key on our <a href="https://stintmint.com/enterprise/signup">signup page</a>.</p>
 
-<p>This example API documentation page was created with <a href="https://github.com/slatedocs/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
-<h1 id='authentication'>Authentication</h1>
+<p>Requests to your StintFlow will need the Stintmint authentication key to be included in all API calls in a header that looks like the following:</p>
+
+<p><strong>Username</strong></p>
+
+<p><em>The email address of the user</em></p>
+
+<p><strong>Password</strong></p>
+
+<p><em>The developer key of the user.</em> This will be available in your account section on the Console.</p>
+<h2 id='post-parameters'>POST Parameters</h2>
 <blockquote>
-<p>To authorize, use this code:</p>
+<p>POST requests to StintFlow</p>
 </blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">requests.auth</span> <span class="kn">import</span> <span class="n">HTTPBasicAuth</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">'https://stintmint.com/api/v1/post'</span>
+<span class="n">username</span> <span class="o">=</span> <span class="s">'enterprise@stintmint.com'</span>       <span class="c">#paste your username (email) here</span>
+<span class="n">key</span> <span class="o">=</span> <span class="s">''</span>                                    <span class="c">#paste your API key here</span>
+<span class="k">def</span> <span class="nf">post_</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">params1</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">key</span><span class="p">),</span><span class="n">json</span><span class="o">=</span><span class="n">params1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">r</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"identifier"</span><span class="p">:</span><span class="s">"test_value"</span><span class="p">,</span>
+    <span class="s">"sfId"</span><span class="p">:</span><span class="s">"test_value"</span><span class="p">,</span>
+    <span class="s">"batchId"</span><span class="p">:</span><span class="s">"test_value"</span><span class="p">,</span>
+    <span class="s">"urgency"</span><span class="p">:</span><span class="s">"test_value"</span><span class="p">,</span>
+    <span class="s">"descriptors"</span><span class="p">:[</span>                         <span class="c">#Add upto 10 descriptors</span>
+        <span class="p">{</span>
+        <span class="s">"name"</span> <span class="p">:</span> <span class="s">"test_value"</span><span class="p">,</span>              <span class="c">#Descriptor (input) names defined for the Stintflow in use on the Console</span>
+        <span class="s">"type"</span> <span class="p">:</span> <span class="s">"TEXT"</span><span class="p">,</span>
+        <span class="s">"info"</span> <span class="p">:</span> <span class="s">"test_value"</span><span class="p">,</span>
+        <span class="s">"caption"</span> <span class="p">:</span> <span class="s">"test_value"</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">post_</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">params</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">r</span>
 </code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+curl -X POST https://stintmint.com/api/v1/post <span class="se">\</span>
+ -u username:<span class="o">{</span>API_KEY<span class="o">}</span> <span class="se">\</span>
+ -d <span class="nv">identifier</span><span class="o">=</span><span class="s2">"test_value"</span> <span class="se">\</span>
+ -d <span class="nv">sfId</span><span class="o">=</span><span class="s2">"test_value"</span> <span class="se">\</span>
+ -d <span class="nv">batchId</span><span class="o">=</span><span class="s2">"test_value"</span> <span class="se">\</span>
+ -d <span class="nv">urgency</span><span class="o">=</span><span class="s2">"test_value"</span> <span class="se">\</span>
+ -d <span class="nv">descriptors</span><span class="o">=</span><span class="s2">"test_array"</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="kn">import</span> <span class="nn">org.apache.http.HttpEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.HttpResponse</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.client.HttpClient</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.client.methods.HttpPost</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.entity.StringEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.impl.client.DefaultHttpClient</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.message.BasicHeader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.protocol.HTTP</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.json.JSONArray</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.json.JSONObject</span><span class="o">;</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
-</blockquote>
+<span class="kn">import</span> <span class="nn">java.io.BufferedReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.InputStream</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.InputStreamReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.nio.charset.StandardCharsets</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Base64</span><span class="o">;</span>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">post</span><span class="o">(</span> <span class="n">String</span> <span class="n">url</span><span class="o">,</span> <span class="n">JSONObject</span> <span class="n">params</span><span class="o">,</span><span class="n">String</span> <span class="n">username</span><span class="o">,</span><span class="n">String</span> <span class="n">password</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">encoded</span> <span class="o">=</span> <span class="n">Base64</span><span class="o">.</span><span class="na">getEncoder</span><span class="o">().</span><span class="na">encodeToString</span><span class="o">((</span><span class="n">username</span><span class="o">+</span><span class="s">":"</span><span class="o">+</span><span class="n">password</span><span class="o">).</span><span class="na">getBytes</span><span class="o">(</span><span class="n">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">));</span>  
+        <span class="n">String</span> <span class="n">responseString</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">HttpClient</span> <span class="n">c</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DefaultHttpClient</span><span class="o">();</span>
+            <span class="n">HttpPost</span> <span class="n">post</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HttpPost</span><span class="o">(</span> <span class="n">url</span> <span class="o">);</span>
+            <span class="n">StringEntity</span> <span class="n">se</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringEntity</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+            <span class="n">se</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="k">new</span> <span class="n">BasicHeader</span><span class="o">(</span><span class="n">HTTP</span><span class="o">.</span><span class="na">CONTENT_TYPE</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">));</span>
+            <span class="n">post</span><span class="o">.</span><span class="na">setEntity</span><span class="o">(</span><span class="n">se</span><span class="o">);</span>
+            <span class="n">post</span><span class="o">.</span><span class="na">setHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span><span class="s">"Basic "</span><span class="o">+</span><span class="n">encoded</span><span class="o">);</span>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+            <span class="n">HttpResponse</span> <span class="n">response</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span> <span class="n">post</span> <span class="o">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">getStatusLine</span><span class="o">().</span><span class="na">getStatusCode</span><span class="o">());</span>
+            <span class="n">HttpEntity</span> <span class="n">entity</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getEntity</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">entity</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">InputStream</span> <span class="n">instream</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="na">getContent</span><span class="o">();</span>
+                <span class="n">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span> <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span> <span class="n">instream</span> <span class="o">)</span> <span class="o">);</span>
+                <span class="n">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="o">();</span>
+                <span class="n">String</span> <span class="n">line</span><span class="o">;</span>
+                <span class="k">while</span> <span class="o">(</span> <span class="o">(</span> <span class="n">line</span> <span class="o">=</span> <span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">()</span> <span class="o">)</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">)</span> <span class="o">{</span>
+                    <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span> <span class="n">line</span> <span class="o">);</span>
+                <span class="o">}</span>
+                <span class="n">responseString</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+                <span class="n">instream</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="n">c</span><span class="o">.</span><span class="na">getConnectionManager</span><span class="o">().</span><span class="na">shutdown</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span> <span class="n">Exception</span> <span class="n">e</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">responseString</span><span class="o">;</span>
+    <span class="o">}</span>
 
-<p><code>Authorization: meowmeowmeow</code></p>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"https://stintmint.com/api/v1/post"</span><span class="o">;</span>
+        <span class="n">String</span> <span class="n">username</span> <span class="o">=</span> <span class="s">"enterprise@stintmint.com"</span><span class="o">;</span>               <span class="err">#</span><span class="n">paste</span> <span class="n">your</span> <span class="nf">username</span> <span class="o">(</span><span class="n">email</span><span class="o">)</span> <span class="n">here</span>
+        <span class="n">String</span> <span class="n">API_KEY</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>                                        <span class="err">#</span><span class="n">paste</span> <span class="n">your</span> <span class="n">API</span> <span class="n">key</span> <span class="n">here</span>
+        <span class="n">JSONObject</span> <span class="n">jsonObject</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">(){{</span>
+            <span class="n">put</span><span class="o">(</span><span class="s">"identifier"</span><span class="o">,</span><span class="s">"test_value"</span><span class="o">);</span>
+            <span class="n">put</span><span class="o">(</span><span class="s">"sfId"</span><span class="o">,</span><span class="s">"test_value"</span><span class="o">);</span>
+            <span class="n">put</span><span class="o">(</span><span class="s">"batchId"</span><span class="o">,</span><span class="s">"test_value"</span><span class="o">);</span>
+            <span class="n">put</span><span class="o">(</span><span class="s">"urgency"</span><span class="o">,</span><span class="s">"test_value"</span><span class="o">);</span>
+            <span class="n">put</span><span class="o">(</span><span class="s">"descriptors"</span><span class="o">,</span><span class="k">new</span> <span class="n">JSONArray</span><span class="o">(){{</span>
+                <span class="n">put</span><span class="o">(</span><span class="k">new</span> <span class="n">JSONObject</span><span class="o">(){{</span>                              <span class="err">#</span><span class="n">Add</span> <span class="n">upto</span> <span class="mi">10</span> <span class="n">descriptors</span>
+                    <span class="nf">put</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span><span class="s">"test_value"</span><span class="o">);</span>                       <span class="err">#</span><span class="n">Descriptor</span> <span class="o">(</span><span class="n">input</span><span class="o">)</span> <span class="n">names</span> <span class="n">defined</span> <span class="k">for</span> <span class="n">the</span> <span class="n">Stintflow</span> <span class="n">in</span> <span class="n">use</span> <span class="n">on</span> <span class="n">the</span> <span class="n">Console</span>
+                    <span class="nf">put</span><span class="o">(</span><span class="s">"type"</span><span class="o">,</span><span class="s">"TEXT"</span><span class="o">);</span>
+                    <span class="n">put</span><span class="o">(</span><span class="s">"info"</span><span class="o">,</span><span class="s">"test_value"</span><span class="o">);</span>
+                    <span class="n">put</span><span class="o">(</span><span class="s">"caption"</span><span class="o">,</span><span class="s">"test_value"</span><span class="o">);</span>
+                <span class="o">}});</span>
+            <span class="o">}});</span>
+        <span class="o">}};</span>
 
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
+        <span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">Sample</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">url</span><span class="o">,</span><span class="n">jsonObject</span><span class="o">,</span><span class="n">username</span><span class="o">,</span><span class="n">API_KEY</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre><h3 id='request'>Request</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -336,100 +409,443 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>identifier</td>
+<td></td>
+<td>Your unique identifier for this product. We will post the responses on the callback url provided by you using this identifier.</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>sfId</td>
+<td></td>
+<td>Service type. Provide your StintFlow ID here. Mandatory.</td>
+</tr>
+<tr>
+<td>batchId</td>
+<td></td>
+<td>Provide an alphanumeric batch ID to track and maintain separate datasets</td>
+</tr>
+<tr>
+<td>descriptors</td>
+<td></td>
+<td>An array of JSON objects containing data corresponding to a single request</td>
+</tr>
+<tr>
+<td>stateOptions</td>
+<td></td>
+<td>An array of JSON objects each corresponding to a module allowing you to control module specific options/classes</td>
+</tr>
+<tr>
+<td>urgency</td>
+<td></td>
+<td>Processing criteria for Request. Eg. U1 (Refer the <a href="http://support.stintmint.com">Support Base</a> for details)</td>
+</tr>
+<tr>
+<td>callbackUrl</td>
+<td></td>
+<td>Processed responses will be posted to this URL</td>
+</tr>
+</tbody></table>
+<h3 id='descriptors'>descriptors</h3>
+<p>Structured as an array of JSON objects to support multiple data values for each identifier while supporting different data types</p>
+
+<p>Here are the parameters of a single &#39;descriptors&#39; element:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td></td>
+<td>Descriptor (input) names defined specific to the Stintflow in use. Names are available for reference on the Console in the Use Stintflow section in the Overview tab.</td>
+</tr>
+<tr>
+<td>type</td>
+<td></td>
+<td>Can be any one of - TEXT, IMAGE, PDF, HREF, AUDIO, VIDEO</td>
+</tr>
+<tr>
+<td>info</td>
+<td></td>
+<td>Value of the descriptor; Can be a URL in case {type:{$nin:[TEXT]}}</td>
+</tr>
+<tr>
+<td>caption</td>
+<td></td>
+<td>The display value of the descriptor in case it needs to be different from the actual descriptor</td>
 </tr>
 </tbody></table>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+<p>All mandatory descriptor fields for a StintFlow (field requirement mentioned on the Console) must be included in the request.</p>
+
+<p>For each Descriptor (input) field, the &#39;name&#39; &#39;type&#39; &amp; &#39;info&#39; keys need to be provided for a Requestto be valid.</p>
+
+<aside class="notice">
+A maximum of 10 descriptors are allowed per request. Log a ticket with us in case that needs to be changed.
 </aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h3 id='stateoptions'>stateOptions</h3>
+<p>Structured as an array of JSON objects to support multiple data values for each identifier while supporting different data types</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>Here are the parameters of a single &#39;stateOptions&#39; element:</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>stateId</td>
+<td></td>
+<td>Alphanumeric key the specific module of your StintFlow. This will be visible to you on your StintFlow upload data page</td>
+</tr>
+<tr>
+<td>options</td>
+<td></td>
+<td>An array of JSON objects each referring to a single option</td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p><em>&#39;options&#39;</em></p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<p>Each element of the stateOptions array has the following structure:</p>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
+<td>optionId</td>
+<td></td>
+<td>Unique alphanumeric key for a single option/class</td>
+</tr>
+<tr>
+<td>type</td>
+<td></td>
+<td>Can be any one of - TEXT, IMAGE</td>
+</tr>
+<tr>
+<td>info</td>
+<td></td>
+<td>The name of the option/class</td>
+</tr>
+<tr>
+<td>caption</td>
+<td></td>
+<td>The display name for this option</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+optionId is mandatory and can not be changed once set. It will take the value of info if left blank the first time. You will receive responses corresponding to 'optionId'.
+</aside>
+
+<aside class="notice">
+caption is optional
+</aside>
+
+<p><a href="#stintflow-responses">Details here</a></p>
+<h1 id='stintflow-responses'>StintFlow responses</h1><h2 id='fixed-endpoint'>Fixed Endpoint</h2>
+<p>You can update your &#39;callbackUrl&#39; in the Accounts section on the Console.</p>
+<h2 id='configure-endpoint'>Configure Endpoint</h2>
+<blockquote>
+<p>Response status code 200</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"identifier"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="err">Unique</span><span class="w"> </span><span class="err">alphanumeric</span><span class="w"> </span><span class="err">string</span><span class="w">
+    </span><span class="s2">"status"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">      </span><span class="err">#</span><span class="w"> </span><span class="err">COMPLETED</span><span class="w">
+    </span><span class="s2">"created"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">     </span><span class="err">#</span><span class="w"> </span><span class="err">UNIX</span><span class="w"> </span><span class="err">time</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">milliseconds</span><span class="w">
+    </span><span class="s2">"completed"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">   </span><span class="err">#</span><span class="w"> </span><span class="err">UNIX</span><span class="w"> </span><span class="err">time</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">milliseconds</span><span class="w">
+    </span><span class="s2">"sfId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="err">Unique</span><span class="w"> </span><span class="err">alphanumeric</span><span class="w"> </span><span class="err">string</span><span class="w"> </span><span class="err">corresponding</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">your</span><span class="w"> </span><span class="err">StintFlow</span><span class="w">
+    </span><span class="s2">"batchId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">     </span><span class="err">#</span><span class="w"> </span><span class="err">Unique</span><span class="w"> </span><span class="err">alphanumeric</span><span class="w"> </span><span class="err">string</span><span class="w"> </span><span class="err">corresponding</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">your</span><span class="w"> </span><span class="err">Batch</span><span class="w">
+    </span><span class="s2">"cost"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="err">Credits</span><span class="w"> </span><span class="err">consumed</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">complete</span><span class="w"> </span><span class="err">request</span><span class="w">
+    </span><span class="s2">"responses"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="err">An</span><span class="w"> </span><span class="err">array</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">JSON</span><span class="w"> </span><span class="err">objects</span><span class="w"> 
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Alternatively, you can send a specific callbackUrl in the POST request as mentioned in the <a href="#post_parameters">section above</a>. In the absence of &#39;callbackUrl&#39; in the POST request, we will default to the URL mentioned in your account.</p>
+
+<aside class="warning">
+Our POST request will make at the most 20 failed attempts to send the query response.
+By default, response code '200' will be treated as a successful attempt.
+</aside>
+<h1 id='fetch-responses'>FETCH responses</h1><h2 id='stintflow-responses-2'>StintFlow responses</h2><h3 id='api-endpoint-2'>API Endpoint</h3>
+<p><code>FETCH https://stintmint.com/api/v1/fetch</code></p>
+<h3 id='authentication-2'>Authentication</h3>
+<p>Stintmint uses Basic Auth to allow access to the API. You need to signup on Stintmint Console to get an authentication key on our <a href="https://stintmint.com/enterprise/signup">signup page</a>.</p>
+
+<p>Requests to your StintFlow will need the Stintmint authentication key to be included in all API calls in a header that looks like the following:</p>
+
+<p><strong>Username</strong></p>
+
+<p><em>The email address of the user</em></p>
+
+<p><strong>Password</strong></p>
+
+<p><em>The developer key of the user.</em> This will be available in your account section on the Console.</p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<blockquote>
+<p>FETCH StintFlow responses:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">requests.auth</span> <span class="kn">import</span> <span class="n">HTTPBasicAuth</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">'https://stintmint.com/api/v1/fetch'</span>
+<span class="n">username</span> <span class="o">=</span> <span class="s">'enterprise@stintmint.com'</span>       <span class="c">#paste your username (email) here</span>
+<span class="n">key</span> <span class="o">=</span> <span class="s">''</span>                                    <span class="c">#paste your API key here</span>
+<span class="k">def</span> <span class="nf">post_</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">params1</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">key</span><span class="p">),</span><span class="n">json</span><span class="o">=</span><span class="n">params1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">r</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"identifier"</span> <span class="p">:</span> <span class="s">"test_value"</span><span class="p">,</span>
+    <span class="s">"sfId"</span> <span class="p">:</span> <span class="s">"test_value"</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">post_</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">params</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">r</span>
+</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
+curl -X GET https://stintmint.com/api/v1/fetch <span class="se">\</span>
+ -u username:<span class="o">{</span>API_KEY<span class="o">}</span> <span class="se">\</span>
+ -d <span class="nv">identifier</span><span class="o">=</span><span class="s2">"test_value"</span> <span class="se">\</span>
+ -d <span class="nv">sfId</span><span class="o">=</span><span class="s2">"test_value"</span> <span class="se">\</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="kn">import</span> <span class="nn">org.apache.http.HttpEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.HttpResponse</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.client.HttpClient</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.client.methods.HttpPost</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.entity.StringEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.impl.client.DefaultHttpClient</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.message.BasicHeader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.protocol.HTTP</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.json.JSONArray</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.json.JSONObject</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.BufferedReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.InputStream</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.InputStreamReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.nio.charset.StandardCharsets</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Base64</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">post</span><span class="o">(</span> <span class="n">String</span> <span class="n">url</span><span class="o">,</span> <span class="n">JSONObject</span> <span class="n">params</span><span class="o">,</span><span class="n">String</span> <span class="n">username</span><span class="o">,</span><span class="n">String</span> <span class="n">password</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">encoded</span> <span class="o">=</span> <span class="n">Base64</span><span class="o">.</span><span class="na">getEncoder</span><span class="o">().</span><span class="na">encodeToString</span><span class="o">((</span><span class="n">username</span><span class="o">+</span><span class="s">":"</span><span class="o">+</span><span class="n">password</span><span class="o">).</span><span class="na">getBytes</span><span class="o">(</span><span class="n">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">));</span>  
+        <span class="n">String</span> <span class="n">responseString</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">HttpClient</span> <span class="n">c</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DefaultHttpClient</span><span class="o">();</span>
+            <span class="n">HttpPost</span> <span class="n">post</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HttpPost</span><span class="o">(</span> <span class="n">url</span> <span class="o">);</span>
+            <span class="n">StringEntity</span> <span class="n">se</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringEntity</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+            <span class="n">se</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="k">new</span> <span class="n">BasicHeader</span><span class="o">(</span><span class="n">HTTP</span><span class="o">.</span><span class="na">CONTENT_TYPE</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">));</span>
+            <span class="n">post</span><span class="o">.</span><span class="na">setEntity</span><span class="o">(</span><span class="n">se</span><span class="o">);</span>
+            <span class="n">post</span><span class="o">.</span><span class="na">setHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span><span class="s">"Basic "</span><span class="o">+</span><span class="n">encoded</span><span class="o">);</span>
+
+            <span class="n">HttpResponse</span> <span class="n">response</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span> <span class="n">post</span> <span class="o">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">getStatusLine</span><span class="o">().</span><span class="na">getStatusCode</span><span class="o">());</span>
+            <span class="n">HttpEntity</span> <span class="n">entity</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getEntity</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">entity</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">InputStream</span> <span class="n">instream</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="na">getContent</span><span class="o">();</span>
+                <span class="n">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span> <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span> <span class="n">instream</span> <span class="o">)</span> <span class="o">);</span>
+                <span class="n">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="o">();</span>
+                <span class="n">String</span> <span class="n">line</span><span class="o">;</span>
+                <span class="k">while</span> <span class="o">(</span> <span class="o">(</span> <span class="n">line</span> <span class="o">=</span> <span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">()</span> <span class="o">)</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">)</span> <span class="o">{</span>
+                    <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span> <span class="n">line</span> <span class="o">);</span>
+                <span class="o">}</span>
+                <span class="n">responseString</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+                <span class="n">instream</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="n">c</span><span class="o">.</span><span class="na">getConnectionManager</span><span class="o">().</span><span class="na">shutdown</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span> <span class="n">Exception</span> <span class="n">e</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">responseString</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"https://stintmint.com/api/v1/fetch"</span><span class="o">;</span>
+        <span class="n">String</span> <span class="n">username</span> <span class="o">=</span> <span class="s">"enterprise@stintmint.com"</span><span class="o">;</span>               <span class="err">#</span><span class="n">paste</span> <span class="n">your</span> <span class="nf">username</span> <span class="o">(</span><span class="n">email</span><span class="o">)</span> <span class="n">here</span>
+        <span class="n">String</span> <span class="n">API_KEY</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>                                        <span class="err">#</span><span class="n">paste</span> <span class="n">your</span> <span class="n">API</span> <span class="n">key</span> <span class="n">here</span>
+        <span class="n">JSONObject</span> <span class="n">jsonObject</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">(){{</span>
+            <span class="n">put</span><span class="o">(</span><span class="s">"identifier"</span><span class="o">,</span><span class="s">"test_value"</span><span class="o">);</span>
+            <span class="n">put</span><span class="o">(</span><span class="s">"sfId"</span><span class="o">,</span><span class="s">"test_value"</span><span class="o">);</span>
+        <span class="o">}};</span>
+
+        <span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">Sample</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">url</span><span class="o">,</span><span class="n">jsonObject</span><span class="o">,</span><span class="n">username</span><span class="o">,</span><span class="n">API_KEY</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+<blockquote>
+<p>Response status code 200</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"identifier"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="err">Unique</span><span class="w"> </span><span class="err">alphanumeric</span><span class="w"> </span><span class="err">string</span><span class="w">
+    </span><span class="s2">"status"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">      </span><span class="err">#</span><span class="w"> </span><span class="err">COMPLETED</span><span class="w">
+    </span><span class="s2">"created"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">     </span><span class="err">#</span><span class="w"> </span><span class="err">UNIX</span><span class="w"> </span><span class="err">time</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">milliseconds</span><span class="w">
+    </span><span class="s2">"completed"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">   </span><span class="err">#</span><span class="w"> </span><span class="err">UNIX</span><span class="w"> </span><span class="err">time</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">milliseconds</span><span class="w">
+    </span><span class="s2">"sfId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="err">Unique</span><span class="w"> </span><span class="err">alphanumeric</span><span class="w"> </span><span class="err">string</span><span class="w"> </span><span class="err">corresponding</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">your</span><span class="w"> </span><span class="err">StintFlow</span><span class="w">
+    </span><span class="s2">"cost"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="err">Credits</span><span class="w"> </span><span class="err">consumed</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">complete</span><span class="w"> </span><span class="err">request</span><span class="w">
+    </span><span class="s2">"responses"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="err">An</span><span class="w"> </span><span class="err">array</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">JSON</span><span class="w"> </span><span class="err">objects</span><span class="w"> 
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>identifier</td>
+<td></td>
+<td>Your unique identifier for this product. We will post the responses on the callback url provided by you using this identifier.</td>
+</tr>
+<tr>
+<td>sfId</td>
+<td></td>
+<td>Unique alphanumeric string corresponding to your StintFlow</td>
+</tr>
+</tbody></table>
+<h2 id='module-responses'>Module responses</h2><h3 id='api-endpoint-3'>API Endpoint</h3>
+<p><code>FETCH https://stintmint.com/api/v1/fetch</code></p>
+<h3 id='authentication-3'>Authentication</h3>
+<p>Stintmint uses Basic Auth to allow access to the API. You need to signup on Stintmint Console to get an authentication key on our <a href="https://stintmint.com/enterprise/signup">signup page</a>.</p>
+
+<p>Requests to your StintFlow will need the Stintmint authentication key to be included in all API calls in a header that looks like the following:</p>
+
+<p><strong>Username</strong></p>
+
+<p><em>The email address of the user</em></p>
+
+<p><strong>Password</strong></p>
+
+<p><em>The developer key of the user.</em> This will be available in your account section on the Console.</p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<blockquote>
+<p>FETCH StintFlow Module responses:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">requests.auth</span> <span class="kn">import</span> <span class="n">HTTPBasicAuth</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">'https://stintmint.com/api/v1/fetch'</span>
+<span class="n">username</span> <span class="o">=</span> <span class="s">'enterprise@stintmint.com'</span>       <span class="c">#paste your username (email) here</span>
+<span class="n">key</span> <span class="o">=</span> <span class="s">''</span>                                    <span class="c">#paste your API key here</span>
+<span class="k">def</span> <span class="nf">post_</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">params1</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">key</span><span class="p">),</span><span class="n">json</span><span class="o">=</span><span class="n">params1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">r</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"identifier"</span> <span class="p">:</span> <span class="s">"test_value"</span><span class="p">,</span>
+    <span class="s">"sfId"</span> <span class="p">:</span> <span class="s">"test_value"</span><span class="p">,</span>
+    <span class="s">"stateId"</span> <span class="p">:</span> <span class="s">"test_value"</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">post_</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">params</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">r</span>
+</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
+curl -X GET https://stintmint.com/api/v1/fetch <span class="se">\</span>
+ -u username:<span class="o">{</span>API_KEY<span class="o">}</span> <span class="se">\</span>
+ -d <span class="nv">identifier</span><span class="o">=</span><span class="s2">"test_value"</span> <span class="se">\</span>
+ -d <span class="nv">sfId</span><span class="o">=</span><span class="s2">"test_value"</span> <span class="se">\</span>
+ -d <span class="nv">stateId</span><span class="o">=</span><span class="s2">"test_value"</span> <span class="se">\</span>
+</code></pre><pre class="highlight java tab-java"><code><span class="kn">import</span> <span class="nn">org.apache.http.HttpEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.HttpResponse</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.client.HttpClient</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.client.methods.HttpPost</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.entity.StringEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.impl.client.DefaultHttpClient</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.message.BasicHeader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.protocol.HTTP</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.json.JSONArray</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.json.JSONObject</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.BufferedReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.InputStream</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.InputStreamReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.nio.charset.StandardCharsets</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Base64</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">post</span><span class="o">(</span> <span class="n">String</span> <span class="n">url</span><span class="o">,</span> <span class="n">JSONObject</span> <span class="n">params</span><span class="o">,</span><span class="n">String</span> <span class="n">username</span><span class="o">,</span><span class="n">String</span> <span class="n">password</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">encoded</span> <span class="o">=</span> <span class="n">Base64</span><span class="o">.</span><span class="na">getEncoder</span><span class="o">().</span><span class="na">encodeToString</span><span class="o">((</span><span class="n">username</span><span class="o">+</span><span class="s">":"</span><span class="o">+</span><span class="n">password</span><span class="o">).</span><span class="na">getBytes</span><span class="o">(</span><span class="n">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">));</span>  
+        <span class="n">String</span> <span class="n">responseString</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">HttpClient</span> <span class="n">c</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DefaultHttpClient</span><span class="o">();</span>
+            <span class="n">HttpPost</span> <span class="n">post</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HttpPost</span><span class="o">(</span> <span class="n">url</span> <span class="o">);</span>
+            <span class="n">StringEntity</span> <span class="n">se</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringEntity</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+            <span class="n">se</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="k">new</span> <span class="n">BasicHeader</span><span class="o">(</span><span class="n">HTTP</span><span class="o">.</span><span class="na">CONTENT_TYPE</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">));</span>
+            <span class="n">post</span><span class="o">.</span><span class="na">setEntity</span><span class="o">(</span><span class="n">se</span><span class="o">);</span>
+            <span class="n">post</span><span class="o">.</span><span class="na">setHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span><span class="s">"Basic "</span><span class="o">+</span><span class="n">encoded</span><span class="o">);</span>
+
+            <span class="n">HttpResponse</span> <span class="n">response</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span> <span class="n">post</span> <span class="o">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">getStatusLine</span><span class="o">().</span><span class="na">getStatusCode</span><span class="o">());</span>
+            <span class="n">HttpEntity</span> <span class="n">entity</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getEntity</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">entity</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">InputStream</span> <span class="n">instream</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="na">getContent</span><span class="o">();</span>
+                <span class="n">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span> <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span> <span class="n">instream</span> <span class="o">)</span> <span class="o">);</span>
+                <span class="n">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="o">();</span>
+                <span class="n">String</span> <span class="n">line</span><span class="o">;</span>
+                <span class="k">while</span> <span class="o">(</span> <span class="o">(</span> <span class="n">line</span> <span class="o">=</span> <span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">()</span> <span class="o">)</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">)</span> <span class="o">{</span>
+                    <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span> <span class="n">line</span> <span class="o">);</span>
+                <span class="o">}</span>
+                <span class="n">responseString</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+                <span class="n">instream</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="n">c</span><span class="o">.</span><span class="na">getConnectionManager</span><span class="o">().</span><span class="na">shutdown</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span> <span class="n">Exception</span> <span class="n">e</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">responseString</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"https://stintmint.com/api/v1/fetch"</span><span class="o">;</span>
+        <span class="n">String</span> <span class="n">username</span> <span class="o">=</span> <span class="s">"enterprise@stintmint.com"</span><span class="o">;</span>               <span class="err">#</span><span class="n">paste</span> <span class="n">your</span> <span class="nf">username</span> <span class="o">(</span><span class="n">email</span><span class="o">)</span> <span class="n">here</span>
+        <span class="n">String</span> <span class="n">API_KEY</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>                                        <span class="err">#</span><span class="n">paste</span> <span class="n">your</span> <span class="n">API</span> <span class="n">key</span> <span class="n">here</span>
+        <span class="n">JSONObject</span> <span class="n">jsonObject</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">(){{</span>
+            <span class="n">put</span><span class="o">(</span><span class="s">"identifier"</span><span class="o">,</span><span class="s">"test_value"</span><span class="o">);</span>
+            <span class="n">put</span><span class="o">(</span><span class="s">"sfId"</span><span class="o">,</span><span class="s">"test_value"</span><span class="o">);</span>
+            <span class="n">put</span><span class="o">(</span><span class="s">"stateId"</span><span class="o">,</span><span class="s">"test_value"</span><span class="o">);</span>
+        <span class="o">}};</span>
+
+        <span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">Sample</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">url</span><span class="o">,</span><span class="n">jsonObject</span><span class="o">,</span><span class="n">username</span><span class="o">,</span><span class="n">API_KEY</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+<blockquote>
+<p>Response status code 200</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"identifier"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="err">Unique</span><span class="w"> </span><span class="err">alphanumeric</span><span class="w"> </span><span class="err">string</span><span class="w">
+    </span><span class="s2">"status"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">      </span><span class="err">#</span><span class="w"> </span><span class="err">COMPLETED</span><span class="w">
+    </span><span class="s2">"stateId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="err">Unique</span><span class="w"> </span><span class="err">alphanumeric</span><span class="w"> </span><span class="err">string</span><span class="w"> </span><span class="err">corresponding</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">your</span><span class="w"> </span><span class="err">StintFlow</span><span class="w"> </span><span class="err">module</span><span class="w">
+    </span><span class="s2">"cost"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="err">Credits</span><span class="w"> </span><span class="err">consumed</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">complete</span><span class="w"> </span><span class="err">request</span><span class="w">
+    </span><span class="s2">"responses"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="err">An</span><span class="w"> </span><span class="err">array</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">JSON</span><span class="w"> </span><span class="err">objects</span><span class="w"> 
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>identifier</td>
+<td></td>
+<td>Your unique identifier for this product. We will post the responses on the callback url provided by you using this identifier.</td>
+</tr>
+<tr>
+<td>sfId</td>
+<td></td>
+<td>Unique alphanumeric string corresponding to your StintFlow</td>
+</tr>
+<tr>
+<td>stateId</td>
+<td></td>
+<td>Alphanumeric key the specific module of your StintFlow. This will be visible to you on your StintFlow upload data page</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
@@ -494,10 +910,9 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">javascript</a>
+                <a href="#" data-language-name="python">Python</a>
+                <a href="#" data-language-name="java">Java</a>
+                <a href="#" data-language-name="shell">cURL</a>
           </div>
       </div>
     </div>
