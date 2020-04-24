@@ -223,15 +223,28 @@
       <ul id="toc" class="toc-list-h1">
           <li>
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#tips" class="toc-h2 toc-link" data-title="Tips">Tips</a>
+                  </li>
+              </ul>
           </li>
           <li>
-            <a href="#post-data-to-stintflow" class="toc-h1 toc-link" data-title="POST data to StintFlow">POST data to StintFlow</a>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+          </li>
+          <li>
+            <a href="#objects" class="toc-h1 toc-link" data-title="Objects">Objects</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#task" class="toc-h2 toc-link" data-title="Task">Task</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#post-data-to-stintmint" class="toc-h1 toc-link" data-title="POST data to Stintmint">POST data to Stintmint</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#api-endpoint" class="toc-h2 toc-link" data-title="API Endpoint">API Endpoint</a>
-                  </li>
-                  <li>
-                    <a href="#authentication" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
                   </li>
                   <li>
                     <a href="#post-parameters" class="toc-h2 toc-link" data-title="POST Parameters">POST Parameters</a>
@@ -239,7 +252,7 @@
               </ul>
           </li>
           <li>
-            <a href="#stintflow-responses" class="toc-h1 toc-link" data-title="StintFlow responses">StintFlow responses</a>
+            <a href="#responses" class="toc-h1 toc-link" data-title="Responses">Responses</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#fixed-endpoint" class="toc-h2 toc-link" data-title="Fixed Endpoint">Fixed Endpoint</a>
@@ -253,10 +266,24 @@
             <a href="#fetch-responses" class="toc-h1 toc-link" data-title="FETCH responses">FETCH responses</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#stintflow-responses-2" class="toc-h2 toc-link" data-title="StintFlow responses">StintFlow responses</a>
+                    <a href="#responses-2" class="toc-h2 toc-link" data-title="Responses">Responses</a>
                   </li>
                   <li>
                     <a href="#module-responses" class="toc-h2 toc-link" data-title="Module responses">Module responses</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#batch" class="toc-h1 toc-link" data-title="Batch">Batch</a>
+          </li>
+          <li>
+            <a href="#stint" class="toc-h1 toc-link" data-title="Stint">Stint</a>
+          </li>
+          <li>
+            <a href="#project" class="toc-h1 toc-link" data-title="Project">Project</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-project" class="toc-h2 toc-link" data-title="Create project">Create project</a>
                   </li>
               </ul>
           </li>
@@ -273,15 +300,26 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Stintmint API! You can use our API to access Stintflow API endpoints, which can send data and receive results from all StintFlows.</p>
+<p>Welcome to Stintmint! You can use our API to access Stintmint API endpoints, which can create, monitor, modify and manage versions of tasks.</p>
 
 <p>We have language bindings in Shell, Python, and Java! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-<h1 id='post-data-to-stintflow'>POST data to StintFlow</h1><h2 id='api-endpoint'>API Endpoint</h2>
-<p><code>POST https://stintmint.com/api/v1/post</code></p>
-<h2 id='authentication'>Authentication</h2>
-<p>Stintmint uses Basic Auth to allow access to the API. You need to signup on Stintmint Console to get an authentication key on our <a href="https://stintmint.com/enterprise/signup">signup page</a>.</p>
+<h2 id='tips'>Tips</h2><h3 id='signup'>Signup</h3>
+<p>You will need to create a Stintmint account to access test and mint (production) authentication keys. It takes less than a minute to do <a href="https://gp3.stintmint.com/signup">signup</a>.</p>
+<h3 id='test-to-mint'>Test to Mint</h3>
+<p>When you are ready to move to production requests, head back to your <a href="https://gp3.stintmint.com/console">Stintmint console</a>. Clicking on the Mint API key dropdown for the first time will prompt you to provide payment information. Enter your credit card details to activate production keys.</p>
+<h3 id='task-guidelines'>Task guidelines</h3>
+<p>While the API parameters includes a header for basic instructions, you may provide additional guidelines to help maximize the accuracy of tasks.</p>
 
-<p>Requests to your StintFlow will need the Stintmint authentication key to be included in all API calls in a header that looks like the following:</p>
+<p>Please use this <a href="docs.google.com/d/">Google Docs</a> template to write your instructions. Few suggestions:
+- Use bullet points
+- Limit each bullet point to a short, consice sentence
+- Write class/field definitions, rules, using indented bullets
+- Provide example images, especially of edge cases
+- Images should have correct and incorrect versions side-by-side for comparison</p>
+<h1 id='authentication'>Authentication</h1>
+<p>Stintmint uses Basic Auth to allow access to the API. You need to create an account to get an authentication key on our <a href="https://stintmint.com/enterprise/signup">signup page</a>.</p>
+
+<p>Requests will need the authentication key provided by Stintmint to be included in all API calls in a header that looks like the following:</p>
 
 <p><strong>Username</strong></p>
 
@@ -290,13 +328,78 @@
 <p><strong>Password</strong></p>
 
 <p><em>The developer key of the user.</em> This will be available in your account section on the Console.</p>
+
+<aside class="notice">
+Authentication keys are a must for test and production modes, each having a separate and unique key on your Stintmint console
+</aside>
+<h1 id='objects'>Objects</h1><h2 id='task'>Task</h2>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>task_id</code></td>
+<td>string</td>
+<td>Unique identifier for each task</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>string</td>
+<td>Type of task as per the list in the supported tasks section</td>
+</tr>
+<tr>
+<td><code>instruction</code></td>
+<td>object</td>
+<td>An object with the parameters for instructions</td>
+</tr>
+<tr>
+<td><code>param</code></td>
+<td>object</td>
+<td>An object with the parameters of a task, based on the type</td>
+</tr>
+<tr>
+<td><code>response</code></td>
+<td>object</td>
+<td>An object corresponding to the response of a completed task</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>string</td>
+<td>Current status of task</td>
+</tr>
+<tr>
+<td><code>created_timestamp</code></td>
+<td>timestamp</td>
+<td>UTC string of when the task was created</td>
+</tr>
+<tr>
+<td><code>completed_timestamp</code></td>
+<td>timestamp</td>
+<td>UTC string of when the task was completed</td>
+</tr>
+<tr>
+<td><code>review_status</code></td>
+<td>string</td>
+<td>Status of task review</td>
+</tr>
+<tr>
+<td><code>meta</code></td>
+<td>object</td>
+<td>Key/value pairs for storing additional information about the task, default by empty, not necessary</td>
+</tr>
+</tbody></table>
+<h1 id='post-data-to-stintmint'>POST data to Stintmint</h1><h2 id='api-endpoint'>API Endpoint</h2>
+<p><code>POST https://api.stintmint.com/v1/post</code></p>
 <h2 id='post-parameters'>POST Parameters</h2>
 <blockquote>
 <p>POST requests to StintFlow</p>
 </blockquote>
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">requests.auth</span> <span class="kn">import</span> <span class="n">HTTPBasicAuth</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s">'https://stintmint.com/api/v1/post'</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.stintmint.com/v1/post'</span>
 <span class="n">username</span> <span class="o">=</span> <span class="s">'enterprise@stintmint.com'</span>       <span class="c">#paste your username (email) here</span>
 <span class="n">key</span> <span class="o">=</span> <span class="s">''</span>                                    <span class="c">#paste your API key here</span>
 <span class="k">def</span> <span class="nf">post_</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">params1</span><span class="p">):</span>
@@ -321,7 +424,7 @@
 <span class="n">r</span> <span class="o">=</span> <span class="n">post_</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">params</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">r</span>
 </code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl -X POST https://stintmint.com/api/v1/post <span class="se">\</span>
+curl -X POST https://api.stintmint.com/v1/post <span class="se">\</span>
  -u username:<span class="o">{</span>API_KEY<span class="o">}</span> <span class="se">\</span>
  -d <span class="nv">identifier</span><span class="o">=</span><span class="s2">"test_value"</span> <span class="se">\</span>
  -d <span class="nv">sfId</span><span class="o">=</span><span class="s2">"test_value"</span> <span class="se">\</span>
@@ -379,7 +482,7 @@ curl -X POST https://stintmint.com/api/v1/post <span class="se">\</span>
     <span class="o">}</span>
 
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
-        <span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"https://stintmint.com/api/v1/post"</span><span class="o">;</span>
+        <span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.stintmint.com/v1/post"</span><span class="o">;</span>
         <span class="n">String</span> <span class="n">username</span> <span class="o">=</span> <span class="s">"enterprise@stintmint.com"</span><span class="o">;</span>               <span class="err">#</span><span class="n">paste</span> <span class="n">your</span> <span class="nf">username</span> <span class="o">(</span><span class="n">email</span><span class="o">)</span> <span class="n">here</span>
         <span class="n">String</span> <span class="n">API_KEY</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>                                        <span class="err">#</span><span class="n">paste</span> <span class="n">your</span> <span class="n">API</span> <span class="n">key</span> <span class="n">here</span>
         <span class="n">JSONObject</span> <span class="n">jsonObject</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">(){{</span>
@@ -552,7 +655,7 @@ caption is optional
 </aside>
 
 <p><a href="#stintflow-responses">Details here</a></p>
-<h1 id='stintflow-responses'>StintFlow responses</h1><h2 id='fixed-endpoint'>Fixed Endpoint</h2>
+<h1 id='responses'>Responses</h1><h2 id='fixed-endpoint'>Fixed Endpoint</h2>
 <p>You can update your &#39;callbackUrl&#39; in the Accounts section on the Console.</p>
 <h2 id='configure-endpoint'>Configure Endpoint</h2>
 <blockquote>
@@ -575,27 +678,15 @@ caption is optional
 Our POST request will make at the most 20 failed attempts to send the query response.
 By default, response code '200' will be treated as a successful attempt.
 </aside>
-<h1 id='fetch-responses'>FETCH responses</h1><h2 id='stintflow-responses-2'>StintFlow responses</h2><h3 id='api-endpoint-2'>API Endpoint</h3>
-<p><code>FETCH https://stintmint.com/api/v1/fetch</code></p>
-<h3 id='authentication-2'>Authentication</h3>
-<p>Stintmint uses Basic Auth to allow access to the API. You need to signup on Stintmint Console to get an authentication key on our <a href="https://stintmint.com/enterprise/signup">signup page</a>.</p>
-
-<p>Requests to your StintFlow will need the Stintmint authentication key to be included in all API calls in a header that looks like the following:</p>
-
-<p><strong>Username</strong></p>
-
-<p><em>The email address of the user</em></p>
-
-<p><strong>Password</strong></p>
-
-<p><em>The developer key of the user.</em> This will be available in your account section on the Console.</p>
+<h1 id='fetch-responses'>FETCH responses</h1><h2 id='responses-2'>Responses</h2><h3 id='api-endpoint-2'>API Endpoint</h3>
+<p><code>FETCH https://api.stintmint.com/v1/fetch</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
 <blockquote>
 <p>FETCH StintFlow responses:</p>
 </blockquote>
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">requests.auth</span> <span class="kn">import</span> <span class="n">HTTPBasicAuth</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s">'https://stintmint.com/api/v1/fetch'</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.stintmint.com/v1/fetch'</span>
 <span class="n">username</span> <span class="o">=</span> <span class="s">'enterprise@stintmint.com'</span>       <span class="c">#paste your username (email) here</span>
 <span class="n">key</span> <span class="o">=</span> <span class="s">''</span>                                    <span class="c">#paste your API key here</span>
 <span class="k">def</span> <span class="nf">post_</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">params1</span><span class="p">):</span>
@@ -610,7 +701,7 @@ By default, response code '200' will be treated as a successful attempt.
 <span class="n">r</span> <span class="o">=</span> <span class="n">post_</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">params</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">r</span>
 </code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl -X GET https://stintmint.com/api/v1/fetch <span class="se">\</span>
+curl -X GET https://api.stintmint.com/v1/fetch <span class="se">\</span>
  -u username:<span class="o">{</span>API_KEY<span class="o">}</span> <span class="se">\</span>
  -d <span class="nv">identifier</span><span class="o">=</span><span class="s2">"test_value"</span> <span class="se">\</span>
  -d <span class="nv">sfId</span><span class="o">=</span><span class="s2">"test_value"</span> <span class="se">\</span>
@@ -665,7 +756,7 @@ curl -X GET https://stintmint.com/api/v1/fetch <span class="se">\</span>
     <span class="o">}</span>
 
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
-        <span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"https://stintmint.com/api/v1/fetch"</span><span class="o">;</span>
+        <span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.stintmint.com/v1/fetch"</span><span class="o">;</span>
         <span class="n">String</span> <span class="n">username</span> <span class="o">=</span> <span class="s">"enterprise@stintmint.com"</span><span class="o">;</span>               <span class="err">#</span><span class="n">paste</span> <span class="n">your</span> <span class="nf">username</span> <span class="o">(</span><span class="n">email</span><span class="o">)</span> <span class="n">here</span>
         <span class="n">String</span> <span class="n">API_KEY</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>                                        <span class="err">#</span><span class="n">paste</span> <span class="n">your</span> <span class="n">API</span> <span class="n">key</span> <span class="n">here</span>
         <span class="n">JSONObject</span> <span class="n">jsonObject</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">(){{</span>
@@ -710,8 +801,8 @@ curl -X GET https://stintmint.com/api/v1/fetch <span class="se">\</span>
 </tr>
 </tbody></table>
 <h2 id='module-responses'>Module responses</h2><h3 id='api-endpoint-3'>API Endpoint</h3>
-<p><code>FETCH https://stintmint.com/api/v1/fetch</code></p>
-<h3 id='authentication-3'>Authentication</h3>
+<p><code>FETCH https://api.stintmint.com/v1/fetch</code></p>
+<h3 id='authentication-2'>Authentication</h3>
 <p>Stintmint uses Basic Auth to allow access to the API. You need to signup on Stintmint Console to get an authentication key on our <a href="https://stintmint.com/enterprise/signup">signup page</a>.</p>
 
 <p>Requests to your StintFlow will need the Stintmint authentication key to be included in all API calls in a header that looks like the following:</p>
@@ -729,7 +820,7 @@ curl -X GET https://stintmint.com/api/v1/fetch <span class="se">\</span>
 </blockquote>
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">requests.auth</span> <span class="kn">import</span> <span class="n">HTTPBasicAuth</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s">'https://stintmint.com/api/v1/fetch'</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.stintmint.com/v1/fetch'</span>
 <span class="n">username</span> <span class="o">=</span> <span class="s">'enterprise@stintmint.com'</span>       <span class="c">#paste your username (email) here</span>
 <span class="n">key</span> <span class="o">=</span> <span class="s">''</span>                                    <span class="c">#paste your API key here</span>
 <span class="k">def</span> <span class="nf">post_</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">params1</span><span class="p">):</span>
@@ -745,7 +836,7 @@ curl -X GET https://stintmint.com/api/v1/fetch <span class="se">\</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">post_</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">params</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">r</span>
 </code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl -X GET https://stintmint.com/api/v1/fetch <span class="se">\</span>
+curl -X GET https://api.stintmint.com/v1/fetch <span class="se">\</span>
  -u username:<span class="o">{</span>API_KEY<span class="o">}</span> <span class="se">\</span>
  -d <span class="nv">identifier</span><span class="o">=</span><span class="s2">"test_value"</span> <span class="se">\</span>
  -d <span class="nv">sfId</span><span class="o">=</span><span class="s2">"test_value"</span> <span class="se">\</span>
@@ -801,7 +892,7 @@ curl -X GET https://stintmint.com/api/v1/fetch <span class="se">\</span>
     <span class="o">}</span>
 
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
-        <span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"https://stintmint.com/api/v1/fetch"</span><span class="o">;</span>
+        <span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.stintmint.com/v1/fetch"</span><span class="o">;</span>
         <span class="n">String</span> <span class="n">username</span> <span class="o">=</span> <span class="s">"enterprise@stintmint.com"</span><span class="o">;</span>               <span class="err">#</span><span class="n">paste</span> <span class="n">your</span> <span class="nf">username</span> <span class="o">(</span><span class="n">email</span><span class="o">)</span> <span class="n">here</span>
         <span class="n">String</span> <span class="n">API_KEY</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>                                        <span class="err">#</span><span class="n">paste</span> <span class="n">your</span> <span class="n">API</span> <span class="n">key</span> <span class="n">here</span>
         <span class="n">JSONObject</span> <span class="n">jsonObject</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">(){{</span>
@@ -849,7 +940,17 @@ curl -X GET https://stintmint.com/api/v1/fetch <span class="se">\</span>
 <td>Alphanumeric key the specific module of your StintFlow. This will be visible to you on your StintFlow upload data page</td>
 </tr>
 </tbody></table>
-<h1 id='errors'>Errors</h1>
+<h1 id='batch'>Batch</h1>
+<p>Batches are a way to maintain datasets and maintain a data pipeline. They can be used to perform different tasks/stints on the same dataset.</p>
+<h1 id='stint'>Stint</h1>
+<p>Stints are a way to group together tasks logically, generally performed on a single or related, data unit.</p>
+<h1 id='project'>Project</h1>
+<p>Projects are a way of organizing similar tasks, so that one can share parameters among tasks. </p>
+
+<p>Projects are also used for worker qualification and tuning orchestration parameters. Please check your payment plan to use these features.</p>
+
+<p>The parameters associated with a project will be inherited by tasks created under that project.</p>
+<h2 id='create-project'>Create project</h2><h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
 </aside>
