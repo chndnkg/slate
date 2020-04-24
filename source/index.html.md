@@ -18,21 +18,36 @@ search: true
 
 # Introduction
 
-Welcome to the Stintmint API! You can use our API to access Stintflow API endpoints, which can send data and receive results from all StintFlows.
+Welcome to Stintmint! You can use our API to access Stintmint API endpoints, which can create, monitor, modify and manage versions of tasks.
 
 We have language bindings in Shell, Python, and Java! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
-# POST data to StintFlow
+## Tips
 
-## API Endpoint
+### Signup
 
-`POST https://stintmint.com/api/v1/post`
+You will need to create a Stintmint account to access test and mint (production) authentication keys. It takes less than a minute to do [signup](https://gp3.stintmint.com/signup).
 
-## Authentication
+### Test to Mint
 
-Stintmint uses Basic Auth to allow access to the API. You need to signup on Stintmint Console to get an authentication key on our [signup page](https://stintmint.com/enterprise/signup).
+When you are ready to move to production requests, head back to your [Stintmint console](https://gp3.stintmint.com/console). Clicking on the Mint API key dropdown for the first time will prompt you to provide payment information. Enter your credit card details to activate production keys.
 
-Requests to your StintFlow will need the Stintmint authentication key to be included in all API calls in a header that looks like the following:
+### Task guidelines
+
+While the API parameters includes a header for basic instructions, you may provide additional guidelines to help maximize the accuracy of tasks.
+
+Please use this [Google Docs](docs.google.com/d/) template to write your instructions. Few suggestions:
+- Use bullet points
+- Limit each bullet point to a short, consice sentence
+- Write class/field definitions, rules, using indented bullets
+- Provide example images, especially of edge cases
+- Images should have correct and incorrect versions side-by-side for comparison
+
+# Authentication
+
+Stintmint uses Basic Auth to allow access to the API. You need to create an account to get an authentication key on our [signup page](https://stintmint.com/enterprise/signup).
+
+Requests will need the authentication key provided by Stintmint to be included in all API calls in a header that looks like the following:
 
 **Username**
 
@@ -42,6 +57,35 @@ Requests to your StintFlow will need the Stintmint authentication key to be incl
 
 *The developer key of the user.* This will be available in your account section on the Console.
 
+<aside class="notice">
+Authentication keys are a must for test and production modes, each having a separate and unique key on your Stintmint console
+</aside>
+
+# Objects
+
+## Task
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `task_id` | string | Unique identifier for each task |
+| `type` | string | Type of task as per the list in the supported tasks section |
+| `instruction` | object | An object with the parameters for instructions |
+| `param` | object | An object with the parameters of a task, based on the type |
+| `response` | object | An object corresponding to the response of a completed task |
+| `status` | string | Current status of task
+| `created_timestamp` | timestamp | UTC string of when the task was created |
+| `completed_timestamp` | timestamp | UTC string of when the task was completed |
+| `review_status` | string | Status of task review |
+| `meta` | object | Key/value pairs for storing additional information about the task, default by empty, not necessary |
+
+
+
+# POST data to Stintmint
+
+## API Endpoint
+
+`POST https://api.stintmint.com/v1/post`
+
 ## POST Parameters
 
 > POST requests to StintFlow
@@ -49,7 +93,7 @@ Requests to your StintFlow will need the Stintmint authentication key to be incl
 ```python
 import requests
 from requests.auth import HTTPBasicAuth
-url = 'https://stintmint.com/api/v1/post'
+url = 'https://api.stintmint.com/v1/post'
 username = 'enterprise@stintmint.com'		#paste your username (email) here
 key = ''									#paste your API key here
 def post_(url,params1):
@@ -77,7 +121,7 @@ print r
 
 ```shell
 # With shell, you can just pass the correct header with each request
-curl -X POST https://stintmint.com/api/v1/post \
+curl -X POST https://api.stintmint.com/v1/post \
  -u username:{API_KEY} \
  -d identifier="test_value" \
  -d sfId="test_value" \
@@ -138,7 +182,7 @@ public class Sample {
     }
 
     public static void main(String args[]) {
-        String url = "https://stintmint.com/api/v1/post";
+        String url = "https://api.stintmint.com/v1/post";
         String username = "enterprise@stintmint.com";				#paste your username (email) here
         String API_KEY = "";										#paste your API key here
         JSONObject jsonObject = new JSONObject(){{
@@ -226,7 +270,7 @@ caption is optional
 
 [Details here](#stintflow-responses)
 
-# StintFlow responses
+# Responses
 
 ## Fixed Endpoint
 You can update your 'callbackUrl' in the Accounts section on the Console.
@@ -257,24 +301,10 @@ By default, response code '200' will be treated as a successful attempt.
 
 # FETCH responses
 
-## StintFlow responses
+## Responses
 
 ### API Endpoint
-`FETCH https://stintmint.com/api/v1/fetch`
-
-### Authentication
-
-Stintmint uses Basic Auth to allow access to the API. You need to signup on Stintmint Console to get an authentication key on our [signup page](https://stintmint.com/enterprise/signup).
-
-Requests to your StintFlow will need the Stintmint authentication key to be included in all API calls in a header that looks like the following:
-
-**Username**
-
-*The email address of the user*
-
-**Password**
-
-*The developer key of the user.* This will be available in your account section on the Console.
+`FETCH https://api.stintmint.com/v1/fetch`
 
 ### Query Parameters
 
@@ -283,7 +313,7 @@ Requests to your StintFlow will need the Stintmint authentication key to be incl
 ```python
 import requests
 from requests.auth import HTTPBasicAuth
-url = 'https://stintmint.com/api/v1/fetch'
+url = 'https://api.stintmint.com/v1/fetch'
 username = 'enterprise@stintmint.com'		#paste your username (email) here
 key = ''									#paste your API key here
 def post_(url,params1):
@@ -301,7 +331,7 @@ print r
 
 ```shell
 # With shell, you can just pass the correct header with each request
-curl -X GET https://stintmint.com/api/v1/fetch \
+curl -X GET https://api.stintmint.com/v1/fetch \
  -u username:{API_KEY} \
  -d identifier="test_value" \
  -d sfId="test_value" \
@@ -359,7 +389,7 @@ public class Sample {
     }
 
     public static void main(String args[]) {
-        String url = "https://stintmint.com/api/v1/fetch";
+        String url = "https://api.stintmint.com/v1/fetch";
         String username = "enterprise@stintmint.com";				#paste your username (email) here
         String API_KEY = "";										#paste your API key here
         JSONObject jsonObject = new JSONObject(){{
@@ -395,7 +425,7 @@ sfId |   | Unique alphanumeric string corresponding to your StintFlow
 ## Module responses
 
 ### API Endpoint
-`FETCH https://stintmint.com/api/v1/fetch`
+`FETCH https://api.stintmint.com/v1/fetch`
 
 ### Authentication
 
@@ -418,7 +448,7 @@ Requests to your StintFlow will need the Stintmint authentication key to be incl
 ```python
 import requests
 from requests.auth import HTTPBasicAuth
-url = 'https://stintmint.com/api/v1/fetch'
+url = 'https://api.stintmint.com/v1/fetch'
 username = 'enterprise@stintmint.com'		#paste your username (email) here
 key = ''									#paste your API key here
 def post_(url,params1):
@@ -437,7 +467,7 @@ print r
 
 ```shell
 # With shell, you can just pass the correct header with each request
-curl -X GET https://stintmint.com/api/v1/fetch \
+curl -X GET https://api.stintmint.com/v1/fetch \
  -u username:{API_KEY} \
  -d identifier="test_value" \
  -d sfId="test_value" \
@@ -496,7 +526,7 @@ public class Sample {
     }
 
     public static void main(String args[]) {
-        String url = "https://stintmint.com/api/v1/fetch";
+        String url = "https://api.stintmint.com/v1/fetch";
         String username = "enterprise@stintmint.com";				#paste your username (email) here
         String API_KEY = "";										#paste your API key here
         JSONObject jsonObject = new JSONObject(){{
@@ -528,3 +558,23 @@ Parameter | Default | Description
 identifier |   | Your unique identifier for this product. We will post the responses on the callback url provided by you using this identifier.
 sfId |   | Unique alphanumeric string corresponding to your StintFlow
 stateId |   | Alphanumeric key the specific module of your StintFlow. This will be visible to you on your StintFlow upload data page
+
+
+# Batch
+
+Batches are a way to maintain datasets and maintain a data pipeline. They can be used to perform different tasks/stints on the same dataset.
+
+# Stint
+
+Stints are a way to group together tasks logically, generally performed on a single or related, data unit.
+
+# Project
+
+Projects are a way of organizing similar tasks, so that one can share parameters among tasks. 
+
+Projects are also used for worker qualification and tuning orchestration parameters. Please check your payment plan to use these features.
+
+The parameters associated with a project will be inherited by tasks created under that project.
+
+## Create project
+
